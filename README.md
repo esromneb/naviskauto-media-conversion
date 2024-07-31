@@ -28,5 +28,5 @@ set the bitrate and compare quality
 
 ```
 rm /media/x/suvsd/output_*
-cp output_* /media/x/suvsd
+cp output_* /media/x/suvsd && sync
 ```
