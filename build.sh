@@ -1,6 +1,7 @@
 #!/bin/bash
 
-VIDIN=wd.sample.mkv
+# VIDIN=wd.sample.mkv
+# VIDIN=wd.sample.mkv
 # VIDIN=tng.sample.avi
 
 # -vf "scale=960x540"
@@ -9,15 +10,15 @@ VIDIN=wd.sample.mkv
 # SCALE="-vf \"scale=960x540\""
 # SCALE=""
 SCALE=-vf\ "scale=720x405"
-SCALE2=-vf\ "scale=720x404"
+SCALEX=-vf\ "scale=720x404"
 
 # only applies to xvid
-# QUALITY=-qscale:v\ 1\ -b:a\ 192k\ -preset\ veryslow
+QUALITYX=-qscale:v\ 1\ -b:a\ 192k\ -preset\ veryslow
 
 QUALITY=-qscale:v\ 1\ -b:a\ 192k
 # QUALITY=""
 
-# ffmpeg -i ${VIDIN} ${SCALE2} ${QUALITY} -c:v libxvid -c:a mp3 output_xvid_avi.avi
+# ffmpeg -i ${VIDIN} ${SCALEX} ${QUALITYX} -c:v libxvid -c:a mp3 output_xvid_avi.avi
 ffmpeg -i ${VIDIN} ${SCALE}  ${QUALITY} -c:v mpeg4 -c:a mp3 output_mpeg4.mp4
 
 
