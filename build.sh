@@ -18,6 +18,7 @@ QUALITYX=-qscale:v\ 1\ -b:a\ 192k\ -preset\ veryslow
 QUALITY=-qscale:v\ 1\ -b:a\ 192k
 # QUALITY=""
 
+
 # ffmpeg -i ${VIDIN} ${SCALEX} ${QUALITYX} -c:v libxvid -c:a mp3 output_xvid_avi.avi
 ffmpeg -i ${VIDIN} ${SCALE}  ${QUALITY} -c:v mpeg4 -c:a mp3 output_mpeg4.mp4
 

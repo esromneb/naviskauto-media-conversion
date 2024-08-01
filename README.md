@@ -30,3 +30,13 @@ set the bitrate and compare quality
 rm /media/x/suvsd/output_*
 cp output_* /media/x/suvsd && sync
 ```
+
+# Chapters
+
+Encode once, rip out the metadata, copy to a new location
+
+```
+encode
+ffmpeg -i output_mpeg4.mp4 -f ffmetadata FFMETADATAFILE
+ffmpeg -i output_mpeg4.mp4 -i FFMETADATAFILE -map_metadata 1 -codec copy output_mpeg4_chap.mp4
+```
