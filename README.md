@@ -43,3 +43,10 @@ ffmpeg -i output_mpeg4.mp4 -i FFMETADATAFILE -map_metadata 1 -codec copy output_
 
 * ref: https://ikyle.me/blog/2020/add-mp4-chapters-ffmpeg
 * ref: https://www.reddit.com/r/VideoEditing/comments/p3fc61/how_do_you_add_chapters_to_a_video_file/
+
+# Fast Start
+Without the fast start flag it takes like almost 30 seconds to start plaing a 3.4G (1 hr 20) movie. When doing the subtitle copy this flag must be present in both calls to ffmpeg
+
+```
+-movflags faststart
+```
