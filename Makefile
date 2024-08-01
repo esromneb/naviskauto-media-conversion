@@ -5,3 +5,5 @@ build:
 
 clean:
 	rm -rf output_*
+	rm -rf UNCHAPTER_*
+

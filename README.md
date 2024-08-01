@@ -40,3 +40,6 @@ encode
 ffmpeg -i output_mpeg4.mp4 -f ffmetadata FFMETADATAFILE
 ffmpeg -i output_mpeg4.mp4 -i FFMETADATAFILE -map_metadata 1 -codec copy output_mpeg4_chap.mp4
 ```
+
+* ref: https://ikyle.me/blog/2020/add-mp4-chapters-ffmpeg
+* ref: https://www.reddit.com/r/VideoEditing/comments/p3fc61/how_do_you_add_chapters_to_a_video_file/

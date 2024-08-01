@@ -20,7 +20,12 @@ QUALITY=-qscale:v\ 1\ -b:a\ 192k
 
 
 # ffmpeg -i ${VIDIN} ${SCALEX} ${QUALITYX} -c:v libxvid -c:a mp3 output_xvid_avi.avi
-ffmpeg -i ${VIDIN} ${SCALE}  ${QUALITY} -c:v mpeg4 -c:a mp3 output_mpeg4.mp4
+ffmpeg -i ${VIDIN} ${SCALE}  ${QUALITY} -movflags faststart -c:v mpeg4 -c:a mp3 UNCHAPTER_mpeg4.mp4
+
+rm FFMETADATAFILE
+ffmpeg -i UNCHAPTER_mpeg4.mp4 -f ffmetadata FFMETADATAFILE
+python3 genchapters.py
+ffmpeg -i UNCHAPTER_mpeg4.mp4 -i FFMETADATAFILE -map_metadata 1 -codec copy output_mpeg4.mp4
 
 
 # ffmpeg -i ${VIDIN} -vf "scale=854x480" -c:v mpeg4 -c:a mp3 output_mpeg4_854.mp4
