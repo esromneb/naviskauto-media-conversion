@@ -7,14 +7,20 @@ def generate_chapters(duration_str):
     
     chapters = []
     
-    # First chapter at 30 seconds
+    # First chapter at 5 seconds
+    chapters.append({
+        "title": "00:05",
+        "startTime": 5 * 1000
+    })
+    
+    # Second chapter at 30 seconds
     chapters.append({
         "title": "00:30",
         "startTime": 30 * 1000
     })
     
-    # Generate chapters every 15 minutes (15 * 60 * 1000 ms)
-    interval = 15 * 60 * 1000
+    # Generate chapters every 10 minutes (10 * 60 * 1000 ms)
+    interval = 10 * 60 * 1000  # 10 minutes in milliseconds
     current_time = interval
     
     while current_time < duration_ms:

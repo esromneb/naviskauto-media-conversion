@@ -8,10 +8,10 @@ SCALE=-vf\ "scale=720x405"
 # Audio bitrate remains at 192kbps
 # QUALITY=-b:v\ 7500k\ -maxrate\ 10000k\ -bufsize\ 20000k\ -b:a\ 192k
 
-# Target 6
-# Max 8
-# Bufer size 16, 2x max
-QUALITY=-b:v\ 6000k\ -maxrate\ 8000k\ -bufsize\ 16000k\ -b:a\ 192k
+# Target 5
+# Max 7
+# Bufer size 14, (which is 2x max)
+QUALITY=-b:v\ 5000k\ -maxrate\ 7000k\ -bufsize\ 14000k\ -b:a\ 192k
 
 ffmpeg -i ${VIDIN} ${SCALE}  ${QUALITY} -movflags faststart -c:v mpeg4 -c:a mp3 UNCHAPTER_mpeg4.mp4
 
