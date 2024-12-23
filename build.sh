@@ -13,6 +13,12 @@ SCALE=-vf\ "scale=720x405"
 # Bufer size 14, (which is 2x max)
 QUALITY=-b:v\ 5000k\ -maxrate\ 7000k\ -bufsize\ 14000k\ -b:a\ 192k
 
+# Create outputs directory if it doesn't exist
+mkdir -p outputs
+
+# Get the filename without extension
+BASENAME=$(basename "${VIDIN%.*}")
+
 ffmpeg -i ${VIDIN} ${SCALE}  ${QUALITY} -movflags faststart -c:v mpeg4 -c:a mp3 UNCHAPTER_mpeg4.mp4
 
 rm -f FFMETADATAFILE
@@ -24,4 +30,4 @@ echo "Video duration: ${DURATION} seconds"
 
 python3 genchapters.py "${DURATION}"
 
-ffmpeg -i UNCHAPTER_mpeg4.mp4 -i FFMETADATAFILE -map_metadata 1 -movflags faststart -codec copy output_mpeg4.mp4
+ffmpeg -i UNCHAPTER_mpeg4.mp4 -i FFMETADATAFILE -map_metadata 1 -movflags faststart -codec copy "outputs/${BASENAME}.mp4"
