@@ -1,32 +1,43 @@
-import re
+import sys
+import math
 
-chapters = list()
-
-with open('chapters.txt', 'r') as f:
-   for line in f:
-      x = re.match(r"(\d):(\d{2}):(\d{2}) (.*)", line)
-      hrs = int(x.group(1))
-      mins = int(x.group(2))
-      secs = int(x.group(3))
-      title = x.group(4)
-
-      minutes = (hrs * 60) + mins
-      seconds = secs + (minutes * 60)
-      timestamp = (seconds * 1000)
-      chap = {
-         "title": title,
-         "startTime": timestamp
-      }
-      chapters.append(chap)
-
-text = ""
-
-for i in range(len(chapters)-1):
-   chap = chapters[i]
-   title = chap['title']
-   start = chap['startTime']
-   end = chapters[i+1]['startTime']-1
-   text += f"""
+def generate_chapters(duration_str):
+    # Convert duration string to float and then to milliseconds
+    duration_ms = int(float(duration_str) * 1000)
+    
+    chapters = []
+    
+    # First chapter at 30 seconds
+    chapters.append({
+        "title": "00:30",
+        "startTime": 30 * 1000
+    })
+    
+    # Generate chapters every 15 minutes (15 * 60 * 1000 ms)
+    interval = 15 * 60 * 1000
+    current_time = interval
+    
+    while current_time < duration_ms:
+        minutes = current_time // (60 * 1000)
+        chapters.append({
+            "title": f"{minutes:02d}:00",
+            "startTime": current_time
+        })
+        current_time += interval
+    
+    text = ""
+    
+    for i in range(len(chapters)):
+        chap = chapters[i]
+        title = chap['title']
+        start = chap['startTime']
+        # If it's the last chapter, use duration as end time
+        if i == len(chapters) - 1:
+            end = duration_ms
+        else:
+            end = chapters[i+1]['startTime'] - 1
+            
+        text += f"""
 [CHAPTER]
 TIMEBASE=1/1000
 START={start}
@@ -34,6 +45,12 @@ END={end}
 title={title}
 """
 
+    with open("FFMETADATAFILE", "a") as myfile:
+        myfile.write(text)
 
-with open("FFMETADATAFILE", "a") as myfile:
-    myfile.write(text)
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python3 genchapters.py <duration_in_seconds>")
+        sys.exit(1)
+        
+    generate_chapters(sys.argv[1])
