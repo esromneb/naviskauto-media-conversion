@@ -2,7 +2,7 @@
 
 SCALE=-vf\ "scale=720x405"
 
-# Target bitrate (-b:v): 7.5 Mbps
+# Target bitrate (-b:v): 7.5 Mbps (about 75% of maxrate)
 # Maximum bitrate (-maxrate): 10 Mbps
 # Buffer size (-bufsize): 20 Mbps (2x maxrate)
 # Audio bitrate remains at 192kbps
