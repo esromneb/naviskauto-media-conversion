@@ -1,4 +1,16 @@
 # naviskauto-media-conversion
+This project converts video files so that they playback with the best quality on the Naviskauto 10.1 Dual Car DVD Player. The output
+files go on a SD Card, and then they player will correctly recognize the video format.
+
+## Purchase
+* https://www.amazon.com/gp/product/B07LFF55JK/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1
+
+# Usage
+On Ubuntu:
+
+```
+VIDIN=movie.mp4 ./build.sh
+```
 
 
 # Search Notes
