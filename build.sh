@@ -19,13 +19,14 @@ mkdir -p outputs
 # Get the filename without extension
 BASENAME=$(basename "${VIDIN%.*}")
 
-ffmpeg -i ${VIDIN} ${SCALE}  ${QUALITY} -movflags faststart -c:v mpeg4 -c:a mp3 UNCHAPTER_mpeg4.mp4
+# Quote VIDIN in ffmpeg commands
+ffmpeg -i "${VIDIN}" ${SCALE} ${QUALITY} -movflags faststart -c:v mpeg4 -c:a mp3 UNCHAPTER_mpeg4.mp4
 
 rm -f FFMETADATAFILE
 ffmpeg -i UNCHAPTER_mpeg4.mp4 -f ffmetadata FFMETADATAFILE
 
 # Get duration in seconds and pass to genchapters.py
-DURATION=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 UNCHAPTER_mpeg4.mp4)
+DURATION=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "UNCHAPTER_mpeg4.mp4")
 echo "Video duration: ${DURATION} seconds"
 
 python3 genchapters.py "${DURATION}"
